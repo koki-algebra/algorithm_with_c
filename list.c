@@ -6,8 +6,8 @@ struct cell {
 	struct cell *next;
 };
 
-struct cell *insert(int x, struct cell *p, struct cell *init);
-struct cell *delete(struct cell *p, struct cell *init);
+struct cell* insert(int x, struct cell *p, struct cell *init);
+struct cell* delete(struct cell *p, struct cell *init);
 
 int main() {
 	struct cell *init;
