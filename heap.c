@@ -36,17 +36,19 @@ int main() {
 
 void insert(int x, int *A, int *n) {
 	int n1;
-	 n1 = *n;
-	 if (n1 >= N) {
+	n1 = *n;
+	if (n1 >= N) {
 		printf("Error: Heap A is full.\n");
 		exit(1);
-	 }
+	}
 
-	 A[n1] = x;  // 末尾へ x を置く
-	 upmin(n1, A, n1+1);
-	 *n = n1 + 1;
+	A[n1] = x;  // 末尾へ x を置く
+	upmin(n1, A, n1+1);
 
-	 return;
+	// ヒープの要素数が1だけ増加
+	*n = n1 + 1;
+
+	return;
 }
 
 int deletemin(int *A, int *n) {
@@ -58,13 +60,17 @@ int deletemin(int *A, int *n) {
 		exit(1);
 	}
 
+	// root が最小値
 	min = A[0];
+
+	// 最下段の最も右の要素を root に移す
 	A[0] = A[n1 - 1];
 
 	if (n1 > 1) {
 		downmin(0, A, n1 - 1);
 	}
 
+	// ヒープの要素数が1だけ減少
 	*n = n1 - 1;
 
 	return min;
@@ -81,8 +87,11 @@ void upmin(int i, int *A, int n) {
 	if (i == 0) {  // root に到達すれば終了
 		return;
 	}
-	j = (i - 1) / 2;  // i の親
 
+	// i の親
+	j = (i - 1) / 2;
+
+	// 親 A[j] の方が大きければ swap
 	if (A[j] > A[i]) {
 		swap(i, j, A);
 		upmin(j, A, n);
@@ -105,10 +114,12 @@ void downmin(int i, int *A, int n) {
 		return;
 	}
 
+	// A[i] の2つの子のうち小さい方を A[j] とする
 	if (j + 1 < n && A[j] > A[j+1]) {
 		j = j + 1;
 	}
 
+	// 親 A[i] の方が大きければ swap
 	if (A[j] < A[i]) {
 		swap(i, j, A);
 		downmin(j, A, n);
