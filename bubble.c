@@ -36,10 +36,10 @@ int main() {
 	return 0;
 }
 
-// bubblesort A[k], ..., A[h] をバブルソート
+// bubblesort A[h], ..., A[k] をバブルソート
 void bubblesort(int h, int k, int *A) {
 	int i, j;
-	int test;  // tet == 1; 既にソート済み
+	int test;  // test == 1; 既にソート済み
 
 	for (i = h; i < k; i++) {
 		test = 1;
